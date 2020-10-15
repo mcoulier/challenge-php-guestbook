@@ -33,6 +33,15 @@ $content = $guestbook->getContent();
 
 var_dump($title, $date, $author, $content);
 
+$guestbookLogs = array (
+        array($title),
+        array($date),
+        array($author),
+        array($content),
+);
+
+file_put_contents('log.json', json_encode($guestbookLogs), FILE_APPEND);
+
 ?>
 
 <!doctype html>
@@ -50,10 +59,22 @@ var_dump($title, $date, $author, $content);
 <body>
 
 <form action="index.php" method="post">
-    Title: <input type="text" name="title"><br>
-    Date: <input type="date" name="date"><br>
-    Name: <input type="text" name="name"><br>
-    Message: <input type="text" name="msg"><br>
+    <p>
+        <label for="title">Title: </label>
+        <input type="text" id="title" name="title">
+    </p>
+    <p>
+        <label for="date">Date: </label>
+        <input type="date" id="date" name="date">
+    </p>
+    <p>
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name">
+    </p>
+    <p>
+        <label for="msg">Message: </label>
+        <textarea id="msg" name="msg" rows="7" cols="50"></textarea>
+    </p>
     <input type="submit">
 </form>
 
