@@ -9,9 +9,6 @@ require('PostLoader.php');
 if (!isset($_POST['title'])){
     $_POST['title'] = "";
 }
-if (!isset($_POST['date'])){
-    $_POST['date'] = "";
-}
 if (!isset($_POST['name'])){
     $_POST['name'] = "";
 }
@@ -20,18 +17,18 @@ if (!isset($_POST['msg'])){
 }
 
 $title = $_POST['title'];
-$date = $_POST['date'];
+$date = new DateTimeImmutable();
 $author = $_POST['name'];
 $content = $_POST['msg'];
 
-$guestbook = new Post($title, $date, $content, $author);
+$post = new Post($title, $date, $content, $author);
 
-$title = $guestbook->getTitle();
-$date = $guestbook->getDate();
-$author = $guestbook->getAuthor();
-$content = $guestbook->getContent();
+$title = $post->getTitle();
+$date = $post->getDate();
+$author = $post->getAuthor();
+$content = $post->getContent();
 
-var_dump($title, $date, $author, $content);
+$getPosts = new PostLoader();
 
 $guestbookLogs = array (
         array($title),
@@ -40,7 +37,7 @@ $guestbookLogs = array (
         array($content),
 );
 
-file_put_contents('log.json', json_encode($guestbookLogs), FILE_APPEND);
+/*file_put_contents('log.json', json_encode($guestbookLogs, JSON_PRETTY_PRINT), FILE_APPEND | LOCK_EX);*/
 
 ?>
 
