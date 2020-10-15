@@ -2,11 +2,36 @@
 
 declare(strict_types=1);
 
+require('Post.php');
+require('PostLoader.php');
+
+
+if (!isset($_POST['title'])){
+    $_POST['title'] = "";
+}
+if (!isset($_POST['date'])){
+    $_POST['date'] = "";
+}
+if (!isset($_POST['name'])){
+    $_POST['name'] = "";
+}
+if (!isset($_POST['msg'])){
+    $_POST['msg'] = "";
+}
+
 $title = $_POST['title'];
 $date = $_POST['date'];
-$name = $_POST['name'];
-$msg = $_POST['msg'];
+$author = $_POST['name'];
+$content = $_POST['msg'];
 
+$guestbook = new Post($title, $date, $content, $author);
+
+$title = $guestbook->getTitle();
+$date = $guestbook->getDate();
+$author = $guestbook->getAuthor();
+$content = $guestbook->getContent();
+
+var_dump($title, $date, $author, $content);
 
 ?>
 
