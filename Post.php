@@ -5,11 +5,11 @@ declare(strict_types=1);
 class Post
 {
     private string $title;
-    private $date;
+    private DateTimeImmutable $date;
     private string $content;
     private string $author;
 
-    public function __construct(string $title, $date, string $content, $author)
+    public function __construct(string $title, DateTimeImmutable $date, string $content, $author)
     {
         $this->title = $title;
         $this->date = $date;
@@ -22,7 +22,7 @@ class Post
         return $this->title;
     }
 
-    public function getDate()
+    public function getDate(): DateTimeImmutable
     {
         return $this->date;
     }
