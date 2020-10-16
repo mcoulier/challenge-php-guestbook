@@ -22,6 +22,9 @@ $title = $_POST['title'];
 $date = new DateTimeImmutable();
 $author = $_POST['name'];
 $content = $_POST['msg'];
+$getPosts = file_get_contents('log.json');
+$getDecodedPosts = json_decode($getPosts, true);
+
 
 //When button is clicked, save full post to json file
 if (isset($_POST['submit'])){
@@ -30,8 +33,10 @@ if (isset($_POST['submit'])){
     $date = $post->getDate();
     $author = $post->getAuthor();
     $content = $post->getContent();
-    $getPosts = new PostLoader($title, $date, $content, $author);
+    $savePosts = new PostLoader($title, $date, $content, $author);
 }
+
+var_dump($getDecodedPosts);
 
 ?>
 
@@ -68,6 +73,9 @@ if (isset($_POST['submit'])){
     </p>
     <input type="submit" name="submit">
 
+    <?php
+    print_r($getDecodedPosts);
+    ?>
 
 </form>
 
