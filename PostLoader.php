@@ -10,19 +10,24 @@ class PostLoader
         $fileArray = [];
         array_push($fileArray, $title, $date, $content, $author);
         file_put_contents('log.json', json_encode($fileArray), JSON_PRETTY_PRINT);
+        foreach ($fileArray as $key => $value)
+        {
+        }
+
 
     }
 
     public function addPost()
     {
-        $guestbook = $this->getData();
 
     }
 
     public function getData()
     {
         $getBook = file_get_contents('log.json');
-        json_decode($getBook, true);
+        $guestbook = json_decode($getBook, true);
+/*        $guestbook[] = array('title' => $title, 'date' => $date, 'content' => $content, 'author' => $author);*/
+
     }
 
 
