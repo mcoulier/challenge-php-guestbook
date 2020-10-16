@@ -23,19 +23,15 @@ $content = $_POST['msg'];
 
 $post = new Post($title, $date, $content, $author);
 
-$title = $post->getTitle();
-$date = $post->getDate();
-$author = $post->getAuthor();
-$content = $post->getContent();
+$getPosts = new PostLoader($post);
 
-$getPosts = new PostLoader();
+if (isset($_POST['submit'])){
+    $title = $post->getTitle();
+    $date = $post->getDate();
+    $author = $post->getAuthor();
+    $content = $post->getContent();
 
-$guestbookLogs = array (
-        array($title),
-        array($date),
-        array($author),
-        array($content),
-);
+}
 
 /*file_put_contents('log.json', json_encode($guestbookLogs, JSON_PRETTY_PRINT), FILE_APPEND | LOCK_EX);*/
 
@@ -72,11 +68,10 @@ $guestbookLogs = array (
         <label for="msg">Message: </label>
         <textarea id="msg" name="msg" rows="7" cols="50"></textarea>
     </p>
-    <input type="submit">
+    <input type="submit" name="submit">
+
+
 </form>
-
-
-
 
 
 
