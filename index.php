@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+//Require the correct files
 require('Post.php');
 require('PostLoader.php');
 
-
+//Setting the boxes to empty string if doesn't exist
 if (!isset($_POST['title'])){
     $_POST['title'] = "";
 }
@@ -16,6 +17,7 @@ if (!isset($_POST['msg'])){
     $_POST['msg'] = "";
 }
 
+//Naming variables
 $title = $_POST['title'];
 $date = new DateTimeImmutable();
 $author = $_POST['name'];
@@ -23,17 +25,18 @@ $content = $_POST['msg'];
 
 $post = new Post($title, $date, $content, $author);
 
-$getPosts = new PostLoader($post);
 
+//When button is clicked, save full post to json file
 if (isset($_POST['submit'])){
     $title = $post->getTitle();
     $date = $post->getDate();
     $author = $post->getAuthor();
     $content = $post->getContent();
+    $getPosts = new PostLoader();
+    $saveToFile = $getPosts->saveToFile();
 
 }
 
-/*file_put_contents('log.json', json_encode($guestbookLogs, JSON_PRETTY_PRINT), FILE_APPEND | LOCK_EX);*/
 
 ?>
 
