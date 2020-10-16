@@ -6,13 +6,27 @@ class PostLoader
 
     public function __construct(string $title, $date, string $content, $author)
     {
-        $fileArray = [];
         $this->posts = ['title' => $title, 'date' => $date, 'content' => $content, 'author' => $author];
+        $fileArray = [];
         array_push($fileArray, $title, $date, $content, $author);
-        $fileArray = json_encode($fileArray);
-        file_put_contents('log.json', $fileArray, JSON_PRETTY_PRINT);
+        file_put_contents('log.json', json_encode($fileArray), JSON_PRETTY_PRINT);
 
     }
+
+    public function addPost()
+    {
+        $guestbook = $this->getData();
+
+    }
+
+    public function getData()
+    {
+        $getBook = file_get_contents('log.json');
+        json_decode($getBook, true);
+    }
+
+
+
 
 /*    public function addPost(Post $post)
     {
@@ -27,12 +41,6 @@ class PostLoader
     public function getPosts(): array
     {
         return $this->posts;
-    }
-
-    public function saveToFile()
-    {
-
-
     }
 
 
