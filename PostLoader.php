@@ -2,12 +2,15 @@
 
 class PostLoader
 {
-    private array $posts = [];
+    private array $posts;
 
-    public function __construct(string $title, DateTimeImmutable $date, string $content, $author)
+    public function __construct(string $title, $date, string $content, $author)
     {
+        $fileArray = [];
         $this->posts = ['title' => $title, 'date' => $date, 'content' => $content, 'author' => $author];
-        return file_put_contents('log.json', JSON_PRETTY_PRINT);
+        array_push($fileArray, $title, $date, $content, $author);
+        $fileArray = json_encode($fileArray);
+        file_put_contents('log.json', $fileArray, JSON_PRETTY_PRINT);
 
     }
 
