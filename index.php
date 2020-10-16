@@ -23,20 +23,15 @@ $date = new DateTimeImmutable();
 $author = $_POST['name'];
 $content = $_POST['msg'];
 
-$post = new Post($title, $date, $content, $author);
-
-
 //When button is clicked, save full post to json file
 if (isset($_POST['submit'])){
+    $post = new Post($title, $date, $content, $author);
     $title = $post->getTitle();
     $date = $post->getDate();
     $author = $post->getAuthor();
     $content = $post->getContent();
-    $getPosts = new PostLoader();
-    $saveToFile = $getPosts->saveToFile();
-
+    $getPosts = new PostLoader($title, $date, $content, $author);
 }
-
 
 ?>
 
